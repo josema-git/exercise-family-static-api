@@ -1,8 +1,8 @@
 class FamilyStructure:
-    def __init__(self, last_name, members = []):
+    def __init__(self, last_name, members = None):
         self.last_name = last_name
         self._next_id = 1
-        self._members = members
+        self._members = members if members is not None else []
 
     # This method generates a unique 'id' when adding members into the list (you shouldn't touch this function)
     def _generate_id(self):
@@ -12,6 +12,8 @@ class FamilyStructure:
 
     def add_member(self, member):
         member['last_name'] = self.last_name
+        if 'id' not in member or member['id'] == None:
+            member['id'] = self._generate_id()
         self._members.append(member)
         ## You have to implement this method
         ## Append the member to the list of _members
