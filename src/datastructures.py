@@ -12,11 +12,14 @@ class FamilyStructure:
 
     def add_member(self, member):
         member['last_name'] = self.last_name
+        for existing_member in self._members:
+            if existing_member['id'] == member['id']:
+                raise ValueError(f"Member with id {member['id']} already exists.")
+            
         if 'id' not in member or member['id'] == None:
             member['id'] = self._generate_id()
         self._members.append(member)
-        ## You have to implement this method
-        ## Append the member to the list of _members
+
 
     def delete_member(self, id):
         self._members = [member for member in self._members if member['id'] != id]
