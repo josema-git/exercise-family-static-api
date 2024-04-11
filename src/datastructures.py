@@ -14,17 +14,15 @@ class FamilyStructure:
         member['last_name'] = self.last_name
         for existing_member in self._members:
             if existing_member['id'] == member['id']:
-                raise ValueError(f"Member with id {member['id']} already exists.")
-            
+                return "id already in use"
         if 'id' not in member or member['id'] == None:
             member['id'] = self._generate_id()
         self._members.append(member)
-
-
+        return "member added"
+    
     def delete_member(self, id):
         self._members = [member for member in self._members if member['id'] != id]
         return self._members
-
 
     def get_member(self, id):
         for member in self._members:
